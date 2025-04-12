@@ -2,7 +2,9 @@ package com.example.guldaldergruppen.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
@@ -21,6 +23,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Surface
+import com.example.guldaldergruppen.pages.components.MyTopAppBar
+import com.example.guldaldergruppen.pages.components.LogOutFloatingActionButton
+
+
+
+
 
 
 
@@ -57,7 +65,47 @@ fun DashboardPage(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Welcome")
+                Button(
+                    onClick = { navController.navigate("shift_plan") },
+                    modifier = Modifier
+                        .height(56.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = Color.Black
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        defaultElevation = 4.dp
+                    )
+                ) {
+                    Text(
+                        text = "    Se vagtplan    ",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = { navController.navigate("contacts") },
+                    modifier = Modifier
+                        .height(56.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = Color.Black
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        defaultElevation = 4.dp
+                    )
+                ) {
+                    Text(
+                        text = "Kontaktpersoner",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+
             }
         }
     }
@@ -65,27 +113,5 @@ fun DashboardPage(
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyTopAppBar(title: String) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge,
-            )
-        },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.White,
-            titleContentColor = Color.Black
-        )
-    )
-}
 
-@Composable
-fun LogOutFloatingActionButton(onClick: () -> Unit) {
-    FloatingActionButton(onClick = onClick) {
-        Text("Logout")
-    }
-}
 

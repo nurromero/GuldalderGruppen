@@ -22,16 +22,16 @@ fun Navigation(
 ) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
-            LoginPage(navController, authViewModel)
+            LoginPage(navController, authViewModel, mainViewModel)
         }
         composable("dashboard") {
             DashboardPage(navController, mainViewModel, authViewModel)
         }
         composable("shift_plan") {
-            ShiftPlanPage(mainViewModel)
+            ShiftPlanPage(mainViewModel, navController, authViewModel)
         }
         composable("contacts") {
-            ContactListPage(mainViewModel)
+            ContactListPage(navController, mainViewModel, authViewModel)
         }
     }
 }

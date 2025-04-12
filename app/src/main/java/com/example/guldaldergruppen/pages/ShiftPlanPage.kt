@@ -7,35 +7,63 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.guldaldergruppen.viewmodel.MainViewModel
 import com.example.guldaldergruppen.model.Shift
+import com.example.guldaldergruppen.pages.components.LogOutFloatingActionButton
+import com.example.guldaldergruppen.pages.components.MyTopAppBar
+import com.example.guldaldergruppen.viewmodel.AuthViewModel
 
 
 @Composable
-fun ShiftPlanPage(mainViewModel: MainViewModel) {
+fun ShiftPlanPage(
+    mainViewModel: MainViewModel,
+    navController: NavHostController,
+    authViewModel: AuthViewModel
+) {
     val shifts by mainViewModel.shifts.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
     ) {
-        Text("Vagtplan", style = MaterialTheme.typography.headlineSmall)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Scaffold(
+            topBar = {
+                MyTopAppBar(title = "Vagtplan")
+            },
+            floatingActionButton = {
+                LogOutFloatingActionButton(onClick = {
+                    authViewModel.signOut()
+                    navController.navigate("login") {
+                        popUpTo("shift_plan") { inclusive = true }
+                    }
+                })
+            }
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
 
-        LazyColumn {
-            items(shifts) { shift ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = "Dato: ${shift.date}")
-                        Text(text = "Adresse: ${shift.address}")
-                        Text(text = "Tidspunkt: ${shift.time}")
+                Spacer(modifier = Modifier.height(16.dp))
+
+                LazyColumn {
+                    items(shifts) { shift ->
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(text = "Dato: ${shift.date}")
+                                Text(text = "Adresse: ${shift.address}")
+                                Text(text = "Tidspunkt: ${shift.time}")
+                            }
+                        }
                     }
                 }
             }
