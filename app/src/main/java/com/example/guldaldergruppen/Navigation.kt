@@ -25,7 +25,7 @@ fun Navigation(
             LoginPage(navController, authViewModel)
         }
         composable("dashboard") {
-            DashboardPage(navController, mainViewModel)
+            DashboardPage(navController, mainViewModel, authViewModel)
         }
         composable("shift_plan") {
             ShiftPlanPage(mainViewModel)
