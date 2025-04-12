@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709501691384",
+    "project_id": "guldaldergruppenapp",
+    "storage_bucket": "guldaldergruppenapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709501691384:android:25e9a10a5df98a3da1a20d",
+        "android_client_info": {
+          "package_name": "com.example.guldaldergruppen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR6gezXSzuLmmlNr32UR_qTK5je2Cp-uI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
