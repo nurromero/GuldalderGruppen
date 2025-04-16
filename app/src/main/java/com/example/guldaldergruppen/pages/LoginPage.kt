@@ -20,10 +20,15 @@ import androidx.navigation.NavHostController
 import com.example.guldaldergruppen.viewmodel.AuthViewModel
 import com.example.guldaldergruppen.viewmodel.MainViewModel
 import com.google.firebase.auth.FirebaseUser
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
-
-
+import androidx.compose.ui.Alignment
+import com.example.guldaldergruppen.R
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 
 
@@ -54,54 +59,62 @@ fun LoginPage(
             }
         }
 
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center
+                .padding(24.dp)
         ) {
 
-            //TODO: FIXXX
             Image(
                 painter = painterResource(id = R.drawable.guldalder_logo),
                 contentDescription = "Logo",
                 modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 40.dp)
                     .size(200.dp)
-                    .padding(bottom = 24.dp)
+                    .clip(RoundedCornerShape(24.dp))
             )
 
 
-
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth(),
-                visualTransformation = PasswordVisualTransformation()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = {
-                    authViewModel.signIn(email, password)
-                },
-                modifier = Modifier.fillMaxWidth()
+            Column(
+                modifier = Modifier.align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Log in")
+
+                Text(
+                    text = "Velkommen",
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF3E3E54),
+                    modifier = Modifier.padding(bottom = 32.dp)
+                )
+
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Email") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Password") },
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = PasswordVisualTransformation()
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = {
+                        authViewModel.signIn(email, password)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Log in")
+                }
             }
-
-
         }
-
     }
-
 }
-
