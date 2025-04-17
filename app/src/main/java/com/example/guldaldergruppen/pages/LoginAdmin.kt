@@ -1,7 +1,6 @@
 package com.example.guldaldergruppen.pages
 
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,30 +44,24 @@ import com.example.guldaldergruppen.viewmodel.AuthViewModel
 import com.example.guldaldergruppen.viewmodel.MainViewModel
 import com.example.guldaldergruppen.pages.components.ThemedBackground
 
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginPage(
+fun LoginAdmin(
     navController: NavHostController,
     authViewModel: AuthViewModel,
     mainViewModel: MainViewModel
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var error by remember {
-        mutableStateOf<String?>(null)
-    }
     val user by authViewModel.user.collectAsState()
 
-        LaunchedEffect(user) {
-            if (user != null) {
-                navController.navigate("dashboard") {
-                    popUpTo("login") { inclusive = true }
-                }
+    LaunchedEffect(user) {
+        if (user != null) {
+            navController.navigate("dashboard") {
+                popUpTo("loginwadmin") { inclusive = true }
             }
         }
+    }
 
     ThemedBackground {
         Box(
@@ -91,7 +84,7 @@ fun LoginPage(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Velkommen",
+                    text = "Admin Login",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xFF3E3E54),
@@ -101,7 +94,7 @@ fun LoginPage(
                 TextField(
                     value = email,
                     onValueChange = { email = it },
-                    placeholder = { Text("Username", color = Color.Gray) },
+                    placeholder = { Text("Admin Username", color = Color.Gray) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 8.dp),
@@ -154,10 +147,10 @@ fun LoginPage(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 TextButton(
-                    onClick = { navController.navigate("loginwadmin") },
+                    onClick = { navController.navigate("login") },
                 ) {
                     Text(
-                        text = "Logging in as an Admin? Click here",
+                        text = "Back to User Login",
                         fontSize = 14.sp,
                         color = Color(0xFF3E3E54)
                     )
