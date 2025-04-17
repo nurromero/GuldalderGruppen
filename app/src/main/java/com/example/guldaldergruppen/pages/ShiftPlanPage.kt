@@ -8,10 +8,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Alignment
 import androidx.navigation.NavHostController
 import com.example.guldaldergruppen.viewmodel.MainViewModel
 import com.example.guldaldergruppen.model.Shift
+import com.example.guldaldergruppen.pages.components.BackButton
 import com.example.guldaldergruppen.pages.components.LogOutFloatingActionButton
 import com.example.guldaldergruppen.pages.components.MyTopAppBar
 import com.example.guldaldergruppen.viewmodel.AuthViewModel
@@ -66,26 +69,40 @@ fun ShiftPlanPage(
                                 Text(text = "Tidspunkt: ${shift.time}")
                             }
                         }
+                        if (authViewModel.isAdmin) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceEvenly
+                            ) {
+                                TextButton(onClick = { /* ingen logic */ }) {
+                                    Text("Rediger")
+                                }
+                                TextButton(onClick = { }) {
+                                    Text("Slet")
+                                }
+                            }
+                        }
+
                     }
                 }
+
                 if (authViewModel.isAdmin) {
                     Button(
-                        onClick = {
-
-                        },
+                        onClick = { /* TODO: Add new shift */ },
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 24.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF3E3E54),
-                            contentColor = Color.White
+                            containerColor = Color.White,
+                            contentColor = Color.Black
                         ),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(24.dp)
                     ) {
                         Text("Tilføj Vagt")
                     }
                 }
-
 
                 }
             }
