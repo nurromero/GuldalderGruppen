@@ -3,9 +3,11 @@ package com.example.guldaldergruppen.pages
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.guldaldergruppen.viewmodel.MainViewModel
@@ -66,7 +68,26 @@ fun ShiftPlanPage(
                         }
                     }
                 }
+                if (authViewModel.isAdmin) {
+                    Button(
+                        onClick = {
+
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF3E3E54),
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Tilføj Vagt")
+                    }
+                }
+
+
+                }
             }
         }
     }
-}
