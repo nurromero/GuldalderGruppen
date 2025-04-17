@@ -57,10 +57,11 @@ fun LoginPage(
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val user by authViewModel.user.collectAsState()
     var error by remember {
         mutableStateOf<String?>(null)
     }
-    val user by authViewModel.user.collectAsState()
+
 
         LaunchedEffect(user) {
             if (user != null) {
